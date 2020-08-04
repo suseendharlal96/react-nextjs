@@ -2,10 +2,16 @@ import Link from "next/link";
 
 import axios from "axios";
 
-const Home = ({ result }) => {
+import { VehiclePerson } from "./VehiclePerson.model";
+
+interface VehiclePersonProps {
+  result: Array<VehiclePerson> | undefined;
+}
+
+const Home = ({ result }: VehiclePersonProps) => {
   return (
     <div>
-      {result.vehicles.map((a, index) => (
+      {result?.map((a, index) => (
         <div key={index}>
           <Link as={`${a.vehicle}/${a.ownerName}`} href="/[vehicle]/[person]">
             <a>
@@ -20,8 +26,8 @@ const Home = ({ result }) => {
 
 Home.getInitialProps = async () => {
   const response = await axios.get("http://localhost:5000/vehicles");
-  console.log(response);
-  return { result: response.data.vehicles };
+  const result: Array<VehiclePerson> = response.data.vehicles.vehicles;
+  return { result };
 };
 
 export default Home;
