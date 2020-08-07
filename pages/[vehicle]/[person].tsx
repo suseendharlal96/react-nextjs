@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 
 import { VehiclePerson } from "../VehiclePerson.model";
+import Link from "next/link";
 
 interface VehiclePersonProps {
   result: Array<VehiclePerson> | undefined;
@@ -17,13 +18,18 @@ interface MyNextPageContext extends NextPageContext {
 }
 
 const Person = ({ result }: VehiclePersonProps) => {
+  const router = useRouter();
   return (
     <div>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      {router.isFallback && <p>Loading</p>}
       <ul>
         {result?.map((r, index) => (
           <li key={index}>
-            {r.ownerName}'s{r.vehicle}
-            <p>{r.details}</p>
+            {r?.ownerName}'s{r?.vehicle}
+            <p>{r?.details}</p>
           </li>
         ))}
       </ul>
@@ -31,11 +37,23 @@ const Person = ({ result }: VehiclePersonProps) => {
   );
 };
 
-Person.getInitialProps = async ({ query }: MyNextPageContext) => {
+export const getStaticProps = async (context) => {
+  console.log("context", context);
   const response = await axios.get(
-    `http://localhost:5000/vehicles/${query.person}/${query.vehicle}`
+    `http://localhost:3000/api/vehicles/${context.params.person}/${context.params.vehicle}`
   );
-  return { result: response.data.vehicles };
+  console.log(response.data);
+  return { props: { result: response.data.vehicles } };
+};
+
+export const getStaticPaths = async () => {
+  return {
+    fallback: true,
+    paths: [
+      { params: { vehicle: "Car", person: "Bruno Antunes" } },
+      { params: { vehicle: "Bike", person: "Bruno Antunes" } },
+    ],
+  };
 };
 
 export default Person;

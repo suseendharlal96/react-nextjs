@@ -1,33 +1,34 @@
 import Link from "next/link";
+import Head from "next/head";
 
-import axios from "axios";
+import React from "react";
 
-import { VehiclePerson } from "./VehiclePerson.model";
+import Menu from "../components/Menu";
 
-interface VehiclePersonProps {
-  result: Array<VehiclePerson> | undefined;
-}
+const client = require("contentful").createClient({
+  space: "h6qz89wq1kfo",
+  accessToken: "NMIohhFQRkDSZIoLHCyJuStjDwosYAuxW4PS0ae20gc",
+});
 
-const Home = ({ result }: VehiclePersonProps) => {
+const Home = ({ result }) => {
   return (
-    <div>
-      {result?.map((a, index) => (
-        <div key={index}>
-          <Link as={`${a.vehicle}/${a.ownerName}`} href="/[vehicle]/[person]">
-            <a>
-              Navigate to {a.ownerName}'s{a.vehicle}
-            </a>
-          </Link>
-        </div>
-      ))}
-    </div>
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
+
+      <Menu items={result} />
+    </>
   );
 };
 
-Home.getInitialProps = async () => {
-  const response = await axios.get("http://localhost:5000/vehicles");
-  const result: Array<VehiclePerson> = response.data.vehicles.vehicles;
-  return { result };
+export const getStaticProps = async () => {
+  console.log("home page");
+  const entries = await client.getEntries();
+  console.log(entries);
+  // const response = await axios.get("http://localhost:5000/vehicles");
+  // const result: Array<VehiclePerson> = response.data.vehicles.vehicles;
+  return { props: { result: [...entries.items] } };
 };
 
 export default Home;
