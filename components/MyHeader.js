@@ -10,7 +10,15 @@ const MyHeader = ({ siteTitle }) => {
   ]);
 
   return (
-    <nav className="navbar navbar-fixed-top navbar-expand-sm bg-dark navbar-dark">
+    <nav
+      style={{
+        position: "fixed",
+        zIndex: 999,
+        backgroundColor: "white",
+        width: "100%",
+      }}
+      className="navbar navbar-fixed-top navbar-expand-sm navbar-dark"
+    >
       <Link href="/">
         <>
           <img
@@ -29,7 +37,11 @@ const MyHeader = ({ siteTitle }) => {
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav mx-auto">
           {links.map((link, i) => (
-            <li key={link.id} className="nav-item">
+            <li
+              key={link.id}
+              style={{ marginRight: "100px" }}
+              className="nav-item"
+            >
               <Link href={link.path}>
                 <a>{link.name}</a>
               </Link>
