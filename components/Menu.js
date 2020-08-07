@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import Link from "next/link";
-import Header from "./Header";
-import Footer from "./Footer";
+
 import Title from "./Title";
 
 const Menu = ({ items }) => {
-  // const [allItems, setAllItems] = useState([]);
-  // const [filteredItems, setfilteredItems] = useState([]);
-  // const [categories, setCategories] = useState([]);
+  const [allItems, setAllItems] = useState([]);
+  const [filteredItems, setfilteredItems] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  // useEffect(() => {
-  //   if (items) {
-  //     setAllItems(items);
-  //     setfilteredItems(items);
-  //     getCategories(items);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (items) {
+      setAllItems(items);
+      setfilteredItems(items);
+      getCategories(items);
+    }
+  }, []);
 
   const getCategories = (items) => {
     let tempItems = items.map((item) => {
-      return item.category.toLowerCase();
+      return item?.fields?.category.toLowerCase();
     });
     let categories = ["All", ...new Set(tempItems)];
     setCategories(categories);
@@ -31,9 +30,9 @@ const Menu = ({ items }) => {
     let filtered = a;
     if (category.toLowerCase() !== "all") {
       filtered = a.filter(
-        (item) => item.category.toLowerCase() === category.toLowerCase()
+        (item) =>
+          item?.fields?.category.toLowerCase() === category.toLowerCase()
       );
-    } else {
     }
     setfilteredItems(filtered);
   };
@@ -46,60 +45,65 @@ const Menu = ({ items }) => {
             <Title title="our menu" />
             <div className="row mb-5">
               <div className="col-10  mx-auto text-center">
-                category
-                {/* {categories.map((category, index) => {
-                return (
-                  <button
-                    type="button"
-                    key={index}
-                    className="btn btn-yellow text-capitalize m-3"
-                    onClick={() => {
-                      handleFilter(category);
-                    }}
-                  >
-                    {category}
-                  </button>
-                );
-              })} */}
+                {categories.map((category, index) => {
+                  return (
+                    <button
+                      type="button"
+                      key={index}
+                      className="btn btn-yellow text-capitalize m-3"
+                      onClick={() => {
+                        handleFilter(category);
+                      }}
+                    >
+                      {category}
+                    </button>
+                  );
+                })}
               </div>
             </div>
             <div className="row">
-              {items.map(
-                (node) =>
-                  node?.sys?.contentType.sys.id === "coffeeItem" && (
-                    <div
-                      key={node?.sys?.id}
-                      className="col-11 col-md-6 my-2 d-flex mx-auto"
+              {filteredItems.map((node) => (
+                <div
+                  key={node?.sys?.id}
+                  className="col-11 col-md-6 my-2 d-flex mx-auto"
+                >
+                  <div>
+                    <Link
+                      href="/menu/[itemName]"
+                      as={`/menu/${node?.fields?.title}`}
                     >
-                      <div>
-                        <Link href="/">
-                          <img
-                            src={node?.fields.image.fields.file.url}
-                            style={{
-                              width: "200px",
-                              height: "200px",
-                            }}
-                          />
-                        </Link>
-                      </div>
+                      <img
+                        src={node?.fields.image.fields.file.url}
+                        style={{
+                          width: "200px",
+                          cursor: "pointer",
+                          height: "200px",
+                        }}
+                      />
+                    </Link>
+                  </div>
 
-                      <div className="flex-grow-1 px-3">
-                        <div className="d-flex justify-content-between">
-                          <Link href="/">
-                            <h6 className="mb-0">{node?.fields?.title}</h6>
-                          </Link>
-                          <h6 className="text-yellow mb-0">
-                            ${node?.fields?.price}
-                          </h6>
-                        </div>
-
-                        <p className="text-muted">
-                          <small>{node?.fields?.description}</small>
-                        </p>
-                      </div>
+                  <div className="flex-grow-1 px-3">
+                    <div className="d-flex justify-content-between">
+                      <Link
+                        href="/menu/[itemName]"
+                        as={`/menu/${node?.fields?.title}`}
+                      >
+                        <a>
+                          <h6 className="mb-0">{node?.fields?.title}</h6>
+                        </a>
+                      </Link>
+                      <h6 className="text-yellow mb-0">
+                        ${node?.fields?.price}
+                      </h6>
                     </div>
-                  )
-              )}
+
+                    <p className="text-muted">
+                      <small>{node?.fields?.description}</small>
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

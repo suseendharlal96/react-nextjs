@@ -1,38 +1,22 @@
-import React from "react";
-
-import { useStaticQuery, graphql } from "gatsby";
+import { useEffect } from "react";
 
 import Product from "./Product";
 import Title from "./Title";
+import { client } from "../util/contentful";
 
-const Products = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      products: allContentfulCoffeeProducts {
-        nodes {
-          id
-          title
-          price
-          image {
-            fluid(maxHeight: 250, maxWidth: 350) {
-              ...GatsbyContentfulFluid
-            }
-          }
-          fields {
-            slug
-          }
-        }
-      }
-    }
-  `);
+const Products = ({ products }) => {
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
   return (
-    <section className="py-5">
+    <section className="py-5" style={{ backgroundColor: "rosybrown" }}>
       <div className="container">
         <Title title="our products" />
         <div className="row">
-          {data &&
-            data.products.nodes.map((node) => (
-              <Product key={node.id} product={node} />
+          {products &&
+            products?.length > 0 &&
+            products?.map((node, index) => (
+              <Product key={index} product={node.fields} />
             ))}
         </div>
       </div>

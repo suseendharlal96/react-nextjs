@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Link } from "gatsby";
+import Link from "next/link";
 
 import Title from "./Title";
 
@@ -19,7 +17,7 @@ const Info = ({ path, btnName }) => {
               laboriosam! Unde autem nesciunt beatae, facere illum rerum
               corporis nihil, sint, commodi in debitis quia.
             </p>
-            <Link to={path}>
+            <Link href={path}>
               <button className="btn text-uppercase btn-yellow">
                 {btnName}
               </button>
