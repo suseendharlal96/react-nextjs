@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Header from "./Header";
+import MyHeader from "./MyHeader";
 import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
     <div>
-      <Header siteTitle="Agape Cafe" />
+      <MyHeader siteTitle="Agape Cafe" />
       <main>{children}</main>
       <Footer />
     </div>

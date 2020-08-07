@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Link from "next/link";
 
-const Header = ({ siteTitle }) => {
+const MyHeader = ({ siteTitle }) => {
   const [links, setlinks] = useState([
     { id: 1, name: "Home", path: "/" },
     { id: 2, name: "About", path: "/about" },
@@ -50,12 +50,12 @@ const Header = ({ siteTitle }) => {
   );
 };
 
-Header.propTypes = {
+MyHeader.propTypes = {
   siteTitle: PropTypes.string,
 };
 
-Header.defaultProps = {
+MyHeader.defaultProps = {
   siteTitle: ``,
 };
 
-export default Header;
+export default MyHeader;
