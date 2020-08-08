@@ -26,7 +26,8 @@ const MyApp = ({ Component, pageProps }) => {
       <style jsx global>
         {`
           #nprogress .bar {
-            backgroundColor: "red";
+            background: orange;
+            height: 4px;
           }
         `}
       </style>

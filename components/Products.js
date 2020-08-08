@@ -1,13 +1,7 @@
-import { useEffect } from "react";
-
 import Product from "./Product";
 import Title from "./Title";
-import { client } from "../util/contentful";
 
 const Products = ({ products }) => {
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
   return (
     <section className="py-5" style={{ backgroundColor: "rosybrown" }}>
       <div className="container">

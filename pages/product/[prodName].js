@@ -3,11 +3,11 @@ import Head from "next/head";
 import { client } from "../../util/contentful";
 import Product from "../../components/Product";
 
-const Item = ({ entry }) => {
+const SingleProduct = ({ entry }) => {
   return (
     <>
       <Head>
-        <title>{`Menu | ${entry?.items[0].fields.title}`}</title>
+        <title>{`Product | ${entry?.items[0].fields.title}`}</title>
       </Head>
       <Product product={entry?.items[0].fields} />
     </>
@@ -16,8 +16,8 @@ const Item = ({ entry }) => {
 
 export const getServerSideProps = async ({ query }) => {
   const entry = await client.getEntries({
-    "fields.title": query.itemName,
-    content_type: "coffeeItem",
+    "fields.title": query.prodName,
+    content_type: "coffeeProducts",
   });
   return {
     props: {
@@ -32,4 +32,4 @@ export const getServerSideProps = async ({ query }) => {
 //     fallback: true,
 //   };
 // };
-export default Item;
+export default SingleProduct;

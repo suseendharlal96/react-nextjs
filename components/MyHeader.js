@@ -8,17 +8,12 @@ const MyHeader = ({ siteTitle }) => {
     { id: 1, name: "Home", path: "/" },
     { id: 2, name: "About", path: "/about" },
   ]);
-
+  const [isOpen, setOpen] = useState(false);
+  const toggleNavbar = () => {
+    setOpen(!isOpen);
+  };
   return (
-    <nav
-      style={{
-        position: "fixed",
-        zIndex: 999,
-        backgroundColor: "white",
-        width: "100%",
-      }}
-      className="navbar navbar-fixed-top navbar-expand-sm navbar-dark"
-    >
+    <nav className="navbar navbar-top navbar-expand-sm navbar-dark bg-dark">
       <Link href="/">
         <>
           <img
@@ -31,10 +26,14 @@ const MyHeader = ({ siteTitle }) => {
           </span>
         </>
       </Link>
-      <button className="navbar-toggler">
+      <button onClick={toggleNavbar} className="navbar-toggler">
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse">
+      <div
+        className={
+          isOpen ? "collapse navbar-collapse" : "collapse navbar-collapse show"
+        }
+      >
         <ul className="navbar-nav mx-auto">
           {links.map((link, i) => (
             <li

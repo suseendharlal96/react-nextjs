@@ -19,14 +19,12 @@ const Home = ({ result, products }) => {
 };
 
 export const getStaticProps = async () => {
-  console.log("home page");
   const entries = await client.getEntries({
     content_type: "coffeeItem",
   });
   const coffeeProducts = await client.getEntries({
     content_type: "coffeeProducts",
   });
-  console.log(coffeeProducts);
   return {
     props: { result: [...entries.items], products: [...coffeeProducts.items] },
   };

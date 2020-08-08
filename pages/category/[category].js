@@ -3,20 +3,23 @@ import Head from "next/head";
 import { client } from "../../util/contentful";
 import Product from "../../components/Product";
 
-const Item = ({ entry }) => {
+const SingleCategory = ({ entry }) => {
   return (
     <>
       <Head>
-        <title>{`Menu | ${entry?.items[0].fields.title}`}</title>
+        <title>{`Category | ${entry?.items[0].fields.category}`}</title>
       </Head>
-      <Product product={entry?.items[0].fields} />
+      <h2 style={{ textAlign: "center" }}>{entry?.items[0].fields.category}</h2>
+      {entry?.items?.map((item) => (
+        <Product product={item?.fields} />
+      ))}
     </>
   );
 };
 
 export const getServerSideProps = async ({ query }) => {
   const entry = await client.getEntries({
-    "fields.title": query.itemName,
+    "fields.category": query.category,
     content_type: "coffeeItem",
   });
   return {
@@ -32,4 +35,4 @@ export const getServerSideProps = async ({ query }) => {
 //     fallback: true,
 //   };
 // };
-export default Item;
+export default SingleCategory;
