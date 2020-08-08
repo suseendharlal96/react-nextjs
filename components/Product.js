@@ -13,11 +13,19 @@ const Product = ({ product }) => {
             />
           </Link>
           <div className="card-body text-center">
-            <Link href="/product/[prodName]" as={`/product/${product.title}`}>
-              <a title="click to view" style={{ cursor: "pointer" }}>
-                {product.title}
-              </a>
-            </Link>
+            {product?.category ? (
+              <Link href="/menu/[prodName]" as={`/menu/${product.title}`}>
+                <a title="click to view" style={{ cursor: "pointer" }}>
+                  {product.title}
+                </a>
+              </Link>
+            ) : (
+              <Link href="/product/[prodName]" as={`/product/${product.title}`}>
+                <a title="click to view" style={{ cursor: "pointer" }}>
+                  {product.title}
+                </a>
+              </Link>
+            )}
             <h6>${product.price}</h6>
             {product?.category && (
               <h6>
