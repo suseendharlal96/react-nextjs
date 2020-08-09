@@ -5432,6 +5432,11 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
+snipcart@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/snipcart/-/snipcart-0.0.1.tgz#01e14b6ef3c0450fe6a94393e2555842ae871a1d"
+  integrity sha1-AeFLbvPARQ/mqUOT4lVYQq6HGh0=
+
 sort-keys@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"

@@ -38,11 +38,11 @@ const Menu = ({ items }) => {
   };
 
   let coffeeItems = (
-    <>
-      {items?.length > 0 ? (
-        <section className="menu py-5">
-          <div className="container">
-            <Title title="our menu" />
+    <section className="menu py-5">
+      <div className="container">
+        {items?.length > 0 ? (
+          <>
+            {/* <Title title="our menu" /> */}
             <div className="row mb-5">
               <div className="col-10  mx-auto text-center">
                 {categories.map((category, index) => {
@@ -75,9 +75,9 @@ const Menu = ({ items }) => {
                       <img
                         src={node?.fields.image.fields.file.url}
                         style={{
-                          width: "200px",
                           cursor: "pointer",
-                          height: "200px",
+                          width: 100,
+                          height: 100,
                         }}
                       />
                     </Link>
@@ -105,21 +105,19 @@ const Menu = ({ items }) => {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      ) : (
-        <section className="menu py-5">
-          <div className="container">
+          </>
+        ) : (
+          <>
             <Title title="best of our menu" />
             <div className="row">
               <div className="col-10 col-6 mx-auto text-center text-capitalize">
                 <h1>there are no items to display</h1>
               </div>
             </div>
-          </div>
-        </section>
-      )}
-    </>
+          </>
+        )}
+      </div>
+    </section>
   );
   return coffeeItems;
 };

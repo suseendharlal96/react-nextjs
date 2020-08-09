@@ -7,7 +7,7 @@ const About = () => {
   return (
     <>
       <Head>
-        <title>About</title>
+        <title>About | Agape Café</title>
       </Head>
       <BackgroundImg
         title="About Us"

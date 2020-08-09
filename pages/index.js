@@ -9,7 +9,7 @@ const Home = ({ result, products }) => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Home | Agape Café</title>
       </Head>
       <BackgroundImg img="/coffeehome.jpg" />
       <Menu items={result} />
