@@ -10,9 +10,15 @@ const SingleCategory = ({ entry }) => {
         <title>{`Category | ${entry?.items[0].fields.category}`}</title>
       </Head>
       <h2 style={{ textAlign: "center" }}>{entry?.items[0].fields.category}</h2>
-      {entry?.items?.map((item) => (
-        <Product product={item?.fields} />
-      ))}
+      <section className="py-5" style={{ backgroundColor: "rosybrown" }}>
+        <div className="container">
+          <div className="row">
+            {entry?.items?.map((item) => (
+              <Product product={item?.fields} />
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 };

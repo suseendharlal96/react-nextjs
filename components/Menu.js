@@ -42,7 +42,7 @@ const Menu = ({ items }) => {
       <div className="container">
         {items?.length > 0 ? (
           <>
-            {/* <Title title="our menu" /> */}
+            <Title title="our menu" />
             <div className="row mb-5">
               <div className="col-10  mx-auto text-center">
                 {categories.map((category, index) => {
@@ -67,7 +67,7 @@ const Menu = ({ items }) => {
                   key={node?.sys?.id}
                   className="col-11 col-md-6 my-2 d-flex mx-auto"
                 >
-                  <div>
+                  <div className="zoom">
                     <Link
                       href="/menu/[itemName]"
                       as={`/menu/${node?.fields?.title}`}
