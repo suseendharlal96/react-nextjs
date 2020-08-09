@@ -36,7 +36,7 @@ const Product = ({ product }) => {
               data-item-name={product.title}
               data-item-price={product.price}
               data-item-image={product?.image?.fields?.file?.url}
-              data-item-url="https://agapecafe.netlify.app"
+              data-item-url="/"
             >
               add to cart
             </button>
