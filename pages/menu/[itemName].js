@@ -15,6 +15,7 @@ const Item = ({ entry }) => {
 };
 
 export const getServerSideProps = async ({ query }) => {
+  console.log(query)
   const entry = await client.getEntries({
     "fields.title": query.itemName,
     content_type: "coffeeItem",

@@ -25,6 +25,11 @@ export const getStaticProps = async () => {
   const coffeeProducts = await client.getEntries({
     content_type: "coffeeProducts",
   });
+  if (!entries) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: { result: [...entries.items], products: [...coffeeProducts.items] },
   };
